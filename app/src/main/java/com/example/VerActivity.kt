@@ -6,10 +6,7 @@ import android.text.InputType
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.recyclersqlite.Contactos
-import com.example.recyclersqlite.DbContactos
-import com.example.recyclersqlite.EditarActivity
-import com.example.recyclersqlite.MainActivity
+import com.example.recyclersqlite.*
 import com.example.recyclersqlite.databinding.ActivityVerBinding
 
 class VerActivity : AppCompatActivity() {
@@ -44,6 +41,16 @@ class VerActivity : AppCompatActivity() {
                 .setMessage("¿Desea eliminar este contacto?")
                 .setPositiveButton("SI") { dialogInterface, i -> if (dbContactos.eliminarContacto(id)) { lista() } }
                 .setNegativeButton("NO") { dialogInterface, i -> }.show()
+        }
+        binding.fabCompartir.setOnClickListener {
+            var objeto:Intent = Intent(Intent.ACTION_SEND)
+            objeto.putExtra(Intent.EXTRA_TEXT,
+                    "Contacto enviado desde ${application.getText(R.string.app_name)}:\n" +
+                    "Nombre: ${contacto.nombre}\n" +
+                    "telefono: ${contacto.telefono}\n" +
+                    "correo: ${contacto.correo_electronico}")
+            objeto.type = "text/plain"
+            startActivity(Intent.createChooser(objeto, "Elige donde compartir"))
         }
     }
 

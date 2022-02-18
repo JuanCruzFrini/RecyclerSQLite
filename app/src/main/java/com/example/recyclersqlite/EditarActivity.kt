@@ -27,7 +27,7 @@ class EditarActivity : AppCompatActivity() {
         } else {
             savedInstanceState.getSerializable("ID") as Int
         }
-        val dbContactos = DbContactos(this@EditarActivity)
+        val dbContactos = DbContactos(this)
 
         contacto = dbContactos.verContacto(id)!!
         binding.txtNombre.setText(contacto.nombre)

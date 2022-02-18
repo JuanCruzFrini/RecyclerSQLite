@@ -10,8 +10,9 @@ class DbContactos(var context: Context?) : DbHelper(context) {
     fun insertarContacto(nombre: String?, telefono: String?, correo_electronico: String?): Long {
         var id: Long = 0
         try {
-            val dbHelper = DbHelper(context = context)
+            val dbHelper = DbHelper(context)
             val db = dbHelper.writableDatabase
+
             val values = ContentValues()
             values.put("nombre", nombre)
             values.put("telefono", telefono)
@@ -43,9 +44,9 @@ class DbContactos(var context: Context?) : DbHelper(context) {
     fun verContacto(id: Int): Contactos? {
         val dbHelper = DbHelper(context)
         val db = dbHelper.writableDatabase
+
         var contacto: Contactos? = null
-        val cursorContactos: Cursor =
-            db.rawQuery("SELECT * FROM $TABLE_CONTACTOS WHERE id = $id LIMIT 1", null)
+        val cursorContactos: Cursor = db.rawQuery("SELECT * FROM $TABLE_CONTACTOS WHERE id = $id LIMIT 1", null)
         if (cursorContactos.moveToFirst()) {
             contacto = Contactos(cursorContactos.getInt(0), cursorContactos.getString(1),cursorContactos.getString(2),cursorContactos.getString(3))
         }
@@ -57,6 +58,7 @@ class DbContactos(var context: Context?) : DbHelper(context) {
         var correcto = false
         val dbHelper = DbHelper(context)
         val db = dbHelper.writableDatabase
+
         correcto = try {
             db.execSQL("UPDATE $TABLE_CONTACTOS SET nombre = '$nombre', telefono = '$telefono', correo_electronico = '$correo_electronico' WHERE id='$id' ")
             true
@@ -73,6 +75,7 @@ class DbContactos(var context: Context?) : DbHelper(context) {
         var correcto = false
         val dbHelper = DbHelper(context)
         val db = dbHelper.writableDatabase
+
         correcto = try {
             db.execSQL("DELETE FROM $TABLE_CONTACTOS WHERE id = '$id'")
             true

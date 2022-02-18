@@ -23,7 +23,7 @@ open class DbHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NOMB
     }
 
     override fun onUpgrade(sqLiteDatabase: SQLiteDatabase, i: Int, i1: Int) {
-        sqLiteDatabase.execSQL("DROP TABLE " + TABLE_CONTACTOS)
+        sqLiteDatabase.execSQL("DROP TABLE $TABLE_CONTACTOS")
         onCreate(sqLiteDatabase)
     }
 
