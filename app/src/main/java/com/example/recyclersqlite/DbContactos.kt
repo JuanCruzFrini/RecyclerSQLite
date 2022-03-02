@@ -3,7 +3,6 @@ package com.example.recyclersqlite
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
-import java.util.*
 
 class DbContactos(var context: Context?) : DbHelper(context) {
 
@@ -87,4 +86,64 @@ class DbContactos(var context: Context?) : DbHelper(context) {
         }
         return correcto
     }
+
+    fun guardarFavorito(id: Int) : Boolean{
+        var correcto = false
+        val dbHelper = DbHelper(context)
+        val db = dbHelper.writableDatabase
+
+        correcto = try {
+            db.execSQL("UPDATE $TABLE_CONTACTOS SET favorito = 1 WHERE id='$id' ")
+            true
+        } catch (ex: Exception) {
+            ex.toString()
+            false
+        } finally {
+            db.close()
+        }
+        return correcto
+    }
+
+    fun eliminarFavorito(id: Int) : Boolean{
+        var correcto = false
+        val dbHelper = DbHelper(context)
+        val db = dbHelper.writableDatabase
+
+        db.execSQL("UPDATE $TABLE_CONTACTOS SET favorito = 0 WHERE id ='$id'")
+        db.close()
+        return correcto
+    }
+
+    fun mostrarFavoritos() : ArrayList<Contactos>? {
+        val dbHelper = DbHelper(context)
+        val db = dbHelper.writableDatabase
+
+        var contacto: Contactos
+        val favoritos: ArrayList<Contactos>? = ArrayList()
+        val favorito = 1
+
+        val cursor:Cursor = db.rawQuery("SELECT * FROM $TABLE_CONTACTOS WHERE favorito ='$favorito' ORDER BY nombre ASC ", null)
+        if (cursor.moveToFirst()){
+            do {
+                contacto = Contactos(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3))
+                favoritos?.add(contacto)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return favoritos
+    }
+
+  /*  fun checkFav(id: Int): Boolean {
+        val dbHelper = DbHelper(context)
+        val db = dbHelper.writableDatabase
+
+        val cursor:Cursor = db.rawQuery("SELECT $id FROM $TABLE_CONTACTOS WHERE favorito= 1", null)
+
+        var retorno:Boolean?
+        retorno = !cursor.equals(null)
+
+        return retorno
+    }*/
+
+
 }

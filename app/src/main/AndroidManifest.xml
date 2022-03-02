@@ -9,16 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RecyclerSQLite">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditarActivity"/>
-        <activity android:name=".NuevoActivity"/>
-        <activity android:name="com.example.VerActivity"/>
+        <activity android:name=".EditarActivity" android:configChanges="orientation|screenSize"/>
+        <activity android:name=".NuevoActivity" android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.example.VerActivity" android:configChanges="orientation|screenSize"/>
+        <activity android:name=".Favoritos" android:configChanges="orientation|screenSize"/>
     </application>
 
 </manifest>

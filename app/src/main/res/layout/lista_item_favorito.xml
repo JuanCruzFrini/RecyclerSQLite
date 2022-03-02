@@ -45,15 +45,15 @@
                     android:textStyle="bold" />
 
                 <ImageButton
-                    android:visibility="gone"
-
                     android:id="@+id/btnFav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_fav"
-                    android:background="#00FFFFFF"/>
+                    android:background="#00FFFFFF"
+                    android:onClick="recreate"
+                    android:src="@drawable/ic_fav" />
 
                 <ImageButton
+                    android:visibility="gone"
                     android:id="@+id/btnNoFav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

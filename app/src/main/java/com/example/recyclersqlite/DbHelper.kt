@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 open class DbHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NOMBRE, null, DATABASE_VERSION) {
 
     companion object {
-        private const val DATABASE_VERSION = 2
+        private const val DATABASE_VERSION = 3
         private const val DATABASE_NOMBRE = "agenda.db"
         const val TABLE_CONTACTOS = "t_contactos"
     }
@@ -18,7 +18,8 @@ open class DbHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NOMB
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "nombre TEXT NOT NULL," +
                     "telefono TEXT NOT NULL," +
-                    "correo_electronico TEXT)"
+                    "correo_electronico TEXT," +
+                    "favorito INTEGER NOT NULL DEFAULT 0" + ")"
         )
     }
 

@@ -40,6 +40,10 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 nuevoRegistro()
                 true
             }
+            R.id.menuFavoritos -> {
+                startActivity(Intent(this, Favoritos::class.java))
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
